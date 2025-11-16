@@ -2,7 +2,7 @@ services:
   - type: web
     name: app-clima-backend
     env: node
-    rootDir: backend
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    rootDir: .
+    buildCommand: npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend
+    startCommand: cd backend && npm start
     autoDeploy: true
