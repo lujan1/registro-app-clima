@@ -8,14 +8,16 @@ dotenv.config();
 // Función para conectar a la base de datos MongoDB
 export const connectDB = async () => {
   try {
-    // Obtener la URI de MongoDB de las variables de entorno o usar valor por defecto
-    const mongoUri = process.env.MONGO_URI || "mongodb+srv://daniellujan123489_db_user:Station192005@cluster0.n8s8m2l.mongodb.net/app-clima?retryWrites=true&w=majority";
+    // Obtener la URI de MongoDB de las variables de entorno
+    const mongoUri = process.env.MONGO_URI;
 
-    // Intentar conectar a MongoDB con opciones de conexión
-    await mongoose.connect(mongoUri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    if (!mongoUri) {
+      console.error("❌ MONGO_URI no está definida en las variables de entorno");
+      process.exit(1);
+    }
+
+    // Intentar conectar a MongoDB sin opciones deprecated
+    await mongoose.connect(mongoUri);
 
     // Mensaje de éxito en la conexión
     console.log("✅ Conectado a MongoDB correctamente");
