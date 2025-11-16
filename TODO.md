@@ -1,30 +1,23 @@
-# TODO: Organizar y corregir app-clima para GitHub y Render
+# TODO: Revisión completa del código y pruebas
 
-## Backend
-- [x] Corregir backend/index.js: Reemplazar contenido con servidor Express correcto.
-- [x] Actualizar backend/controllers/WeatherController.js: Formatear respuesta para clima actual.
-- [x] Agregar endpoint para pronóstico en WeatherController.js.
-- [x] Corregir import en backend/routes/weather.js (case sensitivity).
-- [x] Eliminar archivos vacíos: backend/models/clientes.models.js, backend/database.js.
-- [x] Agregar .env para OPENWEATHER_KEY.
-- [x] Actualizar .gitignore para incluir .env y node_modules.
+## Agregar Comentarios
+- [x] Agregar comentarios faltantes en backend/index.js
+- [x] Agregar comentarios faltantes en backend/routes/UserRoutes.js
+- [x] Agregar comentarios faltantes en backend/controllers/User.Controller.js
+- [x] Agregar comentarios faltantes en backend/models/User.js
+- [x] Agregar comentarios faltantes en backend/db.js
+- [x] Agregar comentarios faltantes en index.html
+- [x] Agregar comentarios faltantes en script.js
+- [x] Agregar comentarios faltantes en login.html
 
-## Frontend
-- [x] Corregir frontend/package.json: Cambiar "boostrap" a "bootstrap".
-- [x] Eliminar frontend/src/index.html (no usado en React).
-- [x] Verificar que frontend/src/App.js esté correcto.
+## Modificar Frontend para Conectar con Backend
+- [x] Modificar script.js: Cambiar registro para enviar POST a /api/users/register con nombre, email, password
+- [x] Modificar script.js: Cambiar login para enviar POST a /api/users/login con email, password
+- [x] Simplificar index.html: Formulario de registro solo con nombre (combinar nombres), email, password
+- [x] Modificar login.html: Usar email en lugar de documento
 
-## Deployment
-- [x] Actualizar backend/render.yaml para incluir build del frontend.
-- [x] Probar localmente: npm run dev en backend, npm start en frontend.
-
-## General
-- [x] Asegurar que APIs funcionen correctamente (agregar OPENWEATHER_KEY en .env).
-- [x] Preparar para push a GitHub.
-
-## Autenticación
-- [x] Integrar formularios de registro y login en frontend
-- [x] Conectar con APIs del backend (/api/users/register y /login)
-- [x] Actualizar estilos CSS para autenticación
-- [x] Mostrar info de usuario logueado y botón de logout
-- [x] Ocultar clima hasta que usuario esté autenticado
+## Probar Funcionalidad
+- [x] Iniciar servidor backend con npm run dev
+- [x] Probar registro: Enviar datos, verificar guardado en DB, prevenir duplicados
+- [x] Probar login: Iniciar sesión con email y password
+- [x] Verificar que no se pueda registrar de nuevo con mismo email
