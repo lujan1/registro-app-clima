@@ -18,6 +18,10 @@ function App() {
   const [authError, setAuthError] = useState(null);
   const [authSuccess, setAuthSuccess] = useState(null);
 
+  // Estados para PQRS
+  const [pqrsForm, setPqrsForm] = useState({ tipo: "", mensaje: "" });
+  const [pqrsSuccess, setPqrsSuccess] = useState(null);
+
   // API_BASE cambia según si estás en localhost o en producción
   const API_BASE =
     window.location.hostname === "localhost"
@@ -92,12 +96,13 @@ function App() {
 
       setAuthSuccess(data.message || "Operación exitosa");
       if (authMode === "login") {
+        // Login exitoso - mostrar la app del clima
         setUser(data.user);
         setAuthForm({ nombre: "", email: "", password: "" });
         setAuthError(null);
         setAuthSuccess(null);
       } else {
-        // Registro exitoso, cambiar a login
+        // Registro exitoso - cambiar automáticamente a login
         setAuthMode("login");
         setAuthForm({ nombre: "", email: "", password: "" });
         setAuthError(null);
@@ -107,6 +112,21 @@ function App() {
       console.error(err);
       setAuthError("Error al conectar con el servidor");
     }
+  };
+
+  // Función para manejar PQRS
+  const handlePqrsSubmit = async (e) => {
+    e.preventDefault();
+    setPqrsSuccess(null);
+
+    if (!pqrsForm.tipo || !pqrsForm.mensaje.trim()) {
+      alert("Por favor, completa todos los campos del PQRS");
+      return;
+    }
+
+    // Por ahora solo mostrar mensaje (puedes implementar envío real después)
+    setPqrsSuccess(`PQRS enviado: ${pqrsForm.tipo} - ${pqrsForm.mensaje}`);
+    setPqrsForm({ tipo: "", mensaje: "" });
   };
 
   const logout = () => {
@@ -202,6 +222,33 @@ function App() {
             </form>
             {authError && <div className="auth-error">{authError}</div>}
             {authSuccess && <div className="auth-success">{authSuccess}</div>}
+
+            {/* Sección PQRS integrada */}
+            <div className="pqrs-section">
+              <h3>PQRS (Peticiones, Quejas, Reclamos, Sugerencias)</h3>
+              <form onSubmit={handlePqrsSubmit} className="pqrs-form">
+                <select
+                  value={pqrsForm.tipo}
+                  onChange={(e) => setPqrsForm({ ...pqrsForm, tipo: e.target.value })}
+                  required
+                >
+                  <option value="">Selecciona tipo</option>
+                  <option value="peticion">Petición</option>
+                  <option value="queja">Queja</option>
+                  <option value="reclamo">Reclamo</option>
+                  <option value="sugerencia">Sugerencia</option>
+                </select>
+                <textarea
+                  placeholder="Mensaje"
+                  value={pqrsForm.mensaje}
+                  onChange={(e) => setPqrsForm({ ...pqrsForm, mensaje: e.target.value })}
+                  rows="4"
+                  required
+                />
+                <button type="submit" className="pqrs-submit-btn">Enviar PQRS</button>
+              </form>
+              {pqrsSuccess && <div className="pqrs-success">{pqrsSuccess}</div>}
+            </div>
           </section>
         )}
 
