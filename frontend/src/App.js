@@ -94,10 +94,14 @@ function App() {
       if (authMode === "login") {
         setUser(data.user);
         setAuthForm({ nombre: "", email: "", password: "" });
+        setAuthError(null);
+        setAuthSuccess(null);
       } else {
         // Registro exitoso, cambiar a login
         setAuthMode("login");
         setAuthForm({ nombre: "", email: "", password: "" });
+        setAuthError(null);
+        setAuthSuccess(null);
       }
     } catch (err) {
       console.error(err);
